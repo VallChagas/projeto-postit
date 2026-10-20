@@ -1,0 +1,40 @@
+# ---------- Python ----------
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+
+# ---------- Ambientes virtuais ----------
+.venv/
+venv/
+env/
+ENV/
+
+# ---------- Banco de dados local ----------
+# Dados do usuário, não versionar
+tarefas.db
+*.db
+*.sqlite
+*.sqlite3
+
+# ---------- Build do PyInstaller ----------
+build/
+dist/
+*.spec
+
+# ---------- Configurações de IDE ----------
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ---------- Sistema operacional ----------
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ---------- Logs e temporários ----------
+*.log
+*.tmp
