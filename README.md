@@ -73,3 +73,21 @@ O projeto foi estruturado com caminhos relativos compatíveis com `sys._MEIPASS`
    ```
 
 O executável independente estará disponível na pasta `dist/PersonaPet.exe`. Ao rodar, o arquivo persistente `tarefas.db` será criado na mesma pasta do executável.
+
+---
+
+## 🎨 Créditos e Licenças
+
+Os sprites do personagem **Persona** foram criados com o
+[Universal LPC Spritesheet Character Generator](https://liberatedpixelcup.github.io/Universal-LPC-Spritesheet-Character-Generator/),
+que combina artes de diversos autores sob licenças abertas (OGA-BY 3.0, CC-BY-SA 3.0, CC-BY 3.0, GPL 3.0 e CC0).
+
+A lista completa de autores, licenças e links de origem de cada peça está em
+[`CREDITOS.txt`](./CREDITOS.txt), exportado pelo próprio gerador.
+
+**Resumo dos autores envolvidos:**
+bluecarrot16 · Evert · TheraHedwig · Benjamin K. Smith (BenCreating) · MuffinElZangano · Durrani · Pierre Vigier (pvigier) · Eliza Wyatt (ElizaWy) · Matthew Krohn (makrohn) · Johannes Sjölund (wulax) · Stephen Challener (Redshrike) · JaidynReiman · Thane Brimhall (pennomi) · laetissima · Ahmad3366
+
+**Licenças aplicáveis:** OGA-BY 3.0, CC-BY-SA 3.0, CC-BY 3.0, GPL 3.0, CC0.
+
+> **Nota:** A licença **CC-BY-SA 3.0** exige que trabalhos derivados dos sprites sejam distribuídos sob a mesma licença. Se você for publicar este projeto, mantenha os créditos e a licença acessíveis.
