@@ -1,93 +1,162 @@
-# 🐾 Persona Desktop Pet & Lembretes
+# Persona
 
-Pet de desktop offline baseado na personagem Persona (estilo LPC), com animações autônomas na barra de tarefas, reações a interações do usuário e lembretes com post-its flutuantes integrados ao SQLite.
+**A quieter way to remember.**
 
----
+Persona is an offline desktop companion for everyday tasks. A pixel-art character lives on your desktop, moves and reacts to interaction, and presents scheduled reminders as small floating notes. Tasks are stored locally in SQLite.
 
-## 🚀 Como Rodar o Projeto
+This repository also contains a responsive, static portfolio website that introduces the project. Its browser demo is illustrative only; it does not connect to the desktop application or create tasks.
 
-### Pré-requisitos
-- Python 3.8+
-- PyQt5 instalado:
-  ```bash
-  pip install PyQt5
-  ```
+## Features
 
-### Executar
-Na pasta do projeto, execute:
+- Autonomous idle, walking, sitting, emote, and fall animations.
+- A task agenda with recent, upcoming, all, and completed filters.
+- Create, edit, complete, and delete scheduled tasks.
+- Floating reminder notes with an action to mark a task complete.
+- Local SQLite storage; no account or backend required.
+- A static portfolio site suitable for GitHub Pages.
+
+## Tech stack
+
+| Component | Technologies |
+| --- | --- |
+| Desktop application | Python, PyQt5, SQLite |
+| Portfolio website | HTML, CSS, vanilla JavaScript |
+| Website fonts | Google Fonts (EB Garamond, Lora, and JetBrains Mono) |
+| Optional Windows executable | PyInstaller |
+
+## Getting started
+
+### Desktop application
+
+**Requirements:** Python 3.8 or newer and `pip`.
+
+1. Clone the repository and open its directory:
+
+   ```bash
+   git clone https://github.com/VallChagas/projeto-postit.git
+   cd projeto-postit
+   ```
+
+2. (Recommended) Create and activate a virtual environment:
+
+   ```bash
+   python -m venv .venv
+   ```
+
+   Windows PowerShell:
+
+   ```powershell
+   .\.venv\Scripts\Activate.ps1
+   ```
+
+   Windows Command Prompt:
+
+   ```bat
+   .venv\Scripts\activate.bat
+   ```
+
+3. Install PyQt5 and start the application:
+
+   ```bash
+   python -m pip install PyQt5
+   python main.py
+   ```
+
+On first launch, Persona creates `tarefas.db` in the project directory. The reminder checker runs while the application is open.
+
+### Portfolio website
+
+The website is plain static HTML, CSS, and JavaScript. No build step or package installation is needed. To preview it locally, start a web server from the repository root:
+
 ```bash
-python main.py
+python -m http.server 8000
 ```
 
----
+Then open <http://localhost:8000> in a browser. The interactive demo animates a sample reminder locally; it does not read from or write to `tarefas.db`.
 
-## 📝 Como Adicionar Tarefas e Lembretes
+### Publish with GitHub Pages
 
-### Opção 1: Via script de teste do banco (`db.py`)
-Para adicionar uma tarefa rápida para daqui a 1 minuto (ideal para testar o popup):
-```bash
-python db.py
-```
+The website uses relative paths and can be published from the repository root:
 
-### Opção 2: Via linha de comando interativa (Python)
-Abra o Python no terminal da pasta do projeto:
+1. Push the repository to GitHub.
+2. Open **Settings → Pages** for the repository.
+3. Under **Build and deployment**, select **Deploy from a branch**, then choose the desired branch and the `/ (root)` folder.
+4. Save and open the URL shown in the Pages settings.
+
+Google Fonts is the only external website dependency. The desktop application itself runs locally and does not require the website.
+
+## Using the desktop app
+
+- **Left-click** the character to trigger an emote.
+- **Right-click** to open the menu, launch the agenda, choose an animation, or exit.
+- **Drag and release** the character in the upper half of the screen to trigger a fall and recovery animation.
+- In the agenda, create a task with a title and reminder date/time. Tasks can also be edited, completed, or deleted.
+- When a scheduled reminder is due, a floating note appears near the character. Choose **Complete** to mark the task done, or close the note to dismiss it.
+
+The agenda provides filters for recent, upcoming, all, and completed tasks.
+
+### Add a task from Python
+
+The agenda is the recommended way to manage tasks. For scripts, `db.py` provides a small API:
+
 ```python
+from datetime import datetime, timedelta
+
 import db
 
-# Formato de data/hora obrigatório: 'YYYY-MM-DD HH:MM'
+db.criar_tabela()
+reminder_time = (datetime.now() + timedelta(hours=1)).strftime("%Y-%m-%d %H:%M")
+
 db.adicionar_tarefa(
-    titulo="Beber Água",
-    descricao="Hora de tomar um copo de água e esticar as pernas!",
-    horario_lembrete="2026-10-20 15:30"
+    titulo="Take a short break",
+    descricao="Stretch and rest your eyes.",
+    horario_lembrete=reminder_time,
 )
 ```
 
----
+The reminder time must use the `YYYY-MM-DD HH:MM` format. To inspect the database helper directly, run `python db.py`; this also inserts an immediate sample reminder.
 
-## 🎮 Interações da Persona
+## Build a Windows executable
 
-- **Clique simples**: Persona faz a pose com mãos na cintura (emote frame 1) e volta ao idle.
-- **Arrastar e soltar na metade inferior**: Volta suavemente ao modo idle.
-- **Arrastar e soltar na metade superior**: Persona levanta os braços (emote frame 3), cai até a barra de tarefas e toca a animação de se levantar (`hurt`).
-- **Autonomia**: De tempos em tempos, Persona anda de um lado para o outro na barra de tarefas ou senta para descansar.
-- **Botão Direito**: Abre o menu de controle com opção para abrir a **📓 Minha Agenda**, animações manuais (`Idle`, `Andar`, `Sentar`, `Emote`, `Hurt`) e `Sair`.
-- **📓 Minha Agenda**: Caderninho de tarefas com filtros ("Recentes", "Próximas", "Todas", "Concluídas"), criação com diálogo visual, edição, conclusão e exclusão.
-- **Post-It Flutuante (Lembrete Instantâneo)**: No horário agendado, um post-it amarelo surge próximo à Persona com opções de **✓ Concluir** e **✕ Fechar**.
+Install PyInstaller:
 
+```bash
+python -m pip install pyinstaller
+```
 
+From the repository root in Windows, package the application and its sprites:
 
----
+```bat
+pyinstaller --noconsole --onefile --name "PersonaPet" --add-data "imagens;imagens" main.py
+```
 
-## 📦 Como Empacotar com PyInstaller (.exe)
+The executable is written to `dist/PersonaPet.exe`. When running the packaged app, the SQLite database is stored beside the executable. The generated `build/` and `dist/` directories are build outputs, not source files.
 
-O projeto foi estruturado com caminhos relativos compatíveis com `sys._MEIPASS`, garantindo que imagens e banco funcionem no executável.
+## Project structure
 
-1. Instale o PyInstaller:
-   ```bash
-   pip install pyinstaller
-   ```
+```text
+.
+├── assets/
+│   ├── main.js
+│   └── style.css
+├── imagens/
+│   └── persona/          # Character animation sprites
+├── agenda.py             # Task agenda and dialogs
+├── animacao.py           # Sprite loading and animation frames
+├── avatar.py             # Desktop character and reminder windows
+├── config.py             # Paths and animation settings
+├── db.py                 # SQLite task operations
+├── index.html            # Static portfolio website
+├── main.py               # Desktop application entry point
+└── verificador.py        # Scheduled reminder checker
+```
 
-2. Execute o comando exato no Windows:
-   ```bash
-   pyinstaller --noconsole --onefile --name "PersonaPet" --add-data "imagens;imagens" main.py
-   ```
+`tarefas.db` is created at runtime and contains local task data. Back it up separately if you want to preserve tasks; do not publish a database containing personal reminders.
 
-O executável independente estará disponível na pasta `dist/PersonaPet.exe`. Ao rodar, o arquivo persistente `tarefas.db` será criado na mesma pasta do executável.
+## Credits and licensing
 
----
+The Persona sprites were assembled with the [Universal LPC Spritesheet Character Generator](https://liberatedpixelcup.github.io/Universal-LPC-Spritesheet-Character-Generator/). The generated artwork may include contributions under OGA-BY 3.0, CC-BY-SA 3.0, CC-BY 3.0, GPL 3.0, and CC0. Applicable terms depend on the individual assets; preserve the required attribution and share-alike notices when redistributing or adapting sprites.
 
-## 🎨 Créditos e Licenças
+Contributors identified for the generated sprites include bluecarrot16, Evert, TheraHedwig, Benjamin K. Smith (BenCreating), MuffinElZangano, Durrani, Pierre Vigier (pvigier), Eliza Wyatt (ElizaWy), Matthew Krohn (makrohn), Johannes Sjölund (wulax), Stephen Challener (Redshrike), JaidynReiman, Thane Brimhall (pennomi), laetissima, and Ahmad3366.
 
-Os sprites do personagem **Persona** foram criados com o
-[Universal LPC Spritesheet Character Generator](https://liberatedpixelcup.github.io/Universal-LPC-Spritesheet-Character-Generator/),
-que combina artes de diversos autores sob licenças abertas (OGA-BY 3.0, CC-BY-SA 3.0, CC-BY 3.0, GPL 3.0 e CC0).
-
-A lista completa de autores, licenças e links de origem de cada peça está em
-[`CREDITOS.txt`](./CREDITOS.txt), exportado pelo próprio gerador.
-
-**Resumo dos autores envolvidos:**
-bluecarrot16 · Evert · TheraHedwig · Benjamin K. Smith (BenCreating) · MuffinElZangano · Durrani · Pierre Vigier (pvigier) · Eliza Wyatt (ElizaWy) · Matthew Krohn (makrohn) · Johannes Sjölund (wulax) · Stephen Challener (Redshrike) · JaidynReiman · Thane Brimhall (pennomi) · laetissima · Ahmad3366
-
-**Licenças aplicáveis:** OGA-BY 3.0, CC-BY-SA 3.0, CC-BY 3.0, GPL 3.0, CC0.
-
-> **Nota:** A licença **CC-BY-SA 3.0** exige que trabalhos derivados dos sprites sejam distribuídos sob a mesma licença. Se você for publicar este projeto, mantenha os créditos e a licença acessíveis.
+The repository does not currently include a project-wide `LICENSE` file. The licenses for the generated sprites do not automatically define the license for the rest of the project.

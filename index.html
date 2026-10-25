@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Persona is an offline desktop companion that turns scheduled tasks into gentle, animated reminders.">
+    <meta name="theme-color" content="#faf8f3">
+    <title>Persona — A desktop companion for mindful reminders</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=JetBrains+Mono:wght@400&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/style.css">
+    <script src="assets/main.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <!--=============== HEADER ===============-->
+    <header class="site-header" id="site-header">
+      <div class="header-inner">
+        <a class="brand" href="#overview" aria-label="Persona home">
+          <span class="brand-mark" aria-hidden="true"><span></span></span>
+          <span>Persona</span>
+        </a>
+
+        <button class="menu-toggle" type="button" aria-label="Open navigation menu" aria-controls="primary-navigation" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <nav class="primary-navigation" id="primary-navigation" aria-label="Primary navigation">
+          <a href="#overview">Overview</a>
+          <a href="#architecture">Architecture</a>
+          <a href="#demo">Demo</a>
+          <a href="#github">GitHub</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <!--=============== HERO ===============-->
+      <section class="hero section-shell" id="overview" aria-labelledby="hero-title">
+        <div class="hero-copy" data-reveal>
+          <p class="context-badge"><span class="pulse-dot" aria-hidden="true"></span> An independent desktop project</p>
+          <h1 id="hero-title">A quieter way<br><em>to remember.</em></h1>
+          <p class="hero-description">Persona is an offline desktop companion that gives everyday tasks a little more presence — with a lively pixel-art friend and reminders that appear right when you need them.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#demo">Try the demo <span aria-hidden="true">↓</span></a>
+            <a class="button button-secondary" href="https://github.com/VallChagas/projeto-postit.git" target="_blank" rel="noopener noreferrer">Source code <span aria-hidden="true">↗</span></a>
+          </div>
+          <div class="hero-stats" aria-label="Project facts">
+            <div class="stat"><strong>2 sec</strong><span>reminder check</span></div>
+            <div class="stat"><strong>5 states</strong><span>animated companion</span></div>
+            <div class="stat"><strong>Offline</strong><span>SQLite storage</span></div>
+          </div>
+        </div>
+
+        <div class="hero-art" data-reveal>
+          <div class="art-caption"><span>FIG. 01</span><span>A small presence on your desktop</span></div>
+          <div class="desktop-scene">
+            <div class="scene-window" aria-hidden="true">
+              <div class="window-top"><span></span><span></span><span></span><i></i></div>
+              <div class="scene-lines"><span></span><span></span><span></span><span></span></div>
+              <div class="scene-calendar"><span>MON</span><span>TUE</span><span>WED</span><span>THU</span><span>FRI</span><b>09</b><b>10</b><b class="today">11</b><b>12</b><b>13</b></div>
+            </div>
+            <div class="reminder-note" aria-hidden="true">
+              <span class="note-label">A GENTLE REMINDER</span>
+              <strong>Take a short<br>stretch break.</strong>
+              <span class="note-time">Today, 10:30</span>
+              <span class="note-complete">✓ &nbsp; Mark complete</span>
+            </div>
+            <div class="character-stage">
+              <span class="stage-shadow" aria-hidden="true"></span>
+              <img class="hero-character" src="imagens/persona/idle/down/1.png" alt="Persona, a pixel-art desktop companion, standing in a relaxed pose" fetchpriority="high">
+              <span class="character-caption">PERSONA / IDLE</span>
+            </div>
+            <div class="scene-footnote"><span>LOCAL FIRST</span><span>EST. WITH CARE</span></div>
+          </div>
+          <div class="art-footnote"><span>Fig. 1</span> Tasks become small, timely moments — not another inbox to manage.</div>
+        </div>
+      </section>
+
+      <!--=============== PROBLEM ===============-->
+      <section class="problem section-shell section-block" aria-labelledby="problem-title">
+        <div class="section-heading" data-reveal>
+          <p class="eyebrow">// The problem</p>
+          <h2 id="problem-title">Remembering should feel<br>less like keeping score.</h2>
+        </div>
+        <div class="problem-columns" data-reveal>
+          <p>Digital reminders are easy to dismiss and just as easy to lose in a crowded list. Even a useful task can start to feel like one more notification asking for attention.</p>
+          <p>Persona explores a more personal alternative: a quiet desktop companion that stays nearby, moves on its own, and brings a reminder into view when its time arrives.</p>
+        </div>
+        <p class="problem-note" data-reveal><span class="note-rule" aria-hidden="true"></span><span>Built to run locally, Persona keeps its schedule in a small SQLite database and makes the reminder itself feel like a friendly interruption — one you can complete or simply close.</span></p>
+      </section>
+
+      <!--=============== ARCHITECTURE ===============-->
+      <section class="architecture section-shell section-block" id="architecture" aria-labelledby="architecture-title">
+        <div class="section-heading section-heading-row" data-reveal>
+          <div>
+            <p class="eyebrow">// Architecture</p>
+            <h2 id="architecture-title">A small system,<br>with a clear rhythm.</h2>
+          </div>
+          <p class="section-intro">Three parts work together: a simple task record, a lightweight schedule check, and a desktop character that makes the result visible.</p>
+        </div>
+
+        <div class="flow-grid">
+          <article class="flow-card flow-card-blue" data-reveal>
+            <div class="flow-card-heading"><span class="roman">I</span><span class="flow-label">Record</span></div>
+            <h3>Give a task a time.</h3>
+            <p>The agenda creates, edits, filters, and completes tasks stored locally in SQLite.</p>
+            <pre aria-label="Task record example"><code>Task {
+  title: "Take a break"
+  due:   "10:30"
+  done:  false
+}</code></pre>
+            <span class="card-foot">AGENDA + SQLITE</span>
+          </article>
+
+          <div class="flow-arrow" aria-hidden="true"><span></span></div>
+
+          <article class="flow-card flow-card-wine" data-reveal>
+            <div class="flow-card-heading"><span class="roman">II</span><span class="flow-label">Observe</span></div>
+            <h3>Check at a gentle pace.</h3>
+            <p>A Qt timer checks pending tasks every two seconds and emits each due reminder once.</p>
+            <pre aria-label="Reminder checking example"><code>every 2 seconds:
+  for task in pending:
+    if task.due &lt;= now:
+      emit(task)</code></pre>
+            <span class="card-foot">QTimer + PYQT5</span>
+          </article>
+
+          <div class="flow-arrow" aria-hidden="true"><span></span></div>
+
+          <article class="flow-card flow-card-green" data-reveal>
+            <div class="flow-card-heading"><span class="roman">III</span><span class="flow-label">Respond</span></div>
+            <h3>Meet the moment.</h3>
+            <p>Persona reacts with an animation and a floating post-it that can mark the task complete.</p>
+            <pre aria-label="Reminder response example"><code>when reminded:
+  animate("emote")
+  show_post_it(task)
+  complete_on_click()</code></pre>
+            <span class="card-foot">DESKTOP COMPANION</span>
+          </article>
+        </div>
+      </section>
+
+      <!--=============== DEMO ===============-->
+      <section class="demo section-shell section-block" id="demo" aria-labelledby="demo-title">
+        <div class="section-heading" data-reveal>
+          <p class="eyebrow">// Demo</p>
+          <h2 id="demo-title">A reminder, in miniature.</h2>
+          <p class="section-intro">This browser-only preview shows the shape of a Persona reminder. It does not connect to the desktop app or save a task.</p>
+        </div>
+        <div class="demo-panel" data-reveal>
+          <div class="demo-controls">
+            <label for="reminder-example">Choose an example</label>
+            <select id="reminder-example">
+              <option value="stretch">Take a short stretch break</option>
+              <option value="water">Drink a glass of water</option>
+              <option value="focus">Return to your reading</option>
+            </select>
+            <button class="button button-primary" id="preview-button" type="button">Preview reminder</button>
+          </div>
+          <div class="demo-result">
+            <div class="demo-stage" id="demo-stage" aria-label="Animated reminder preview">
+              <p class="stage-instruction">A little company, right on time.</p>
+              <div class="demo-character" id="demo-character" aria-hidden="true">
+                <span class="demo-bubble" id="demo-bubble" aria-hidden="true">Your reminder will appear here.</span>
+                <img src="imagens/persona/idle/down/1.png" alt="Persona appears with a reminder" loading="lazy">
+              </div>
+            </div>
+            <div class="demo-output-wrap">
+              <div class="output-heading"><span>REMINDER PREVIEW</span><span class="status-badge" id="demo-status" role="status">IDLE</span></div>
+              <pre class="demo-output" id="demo-output" aria-live="polite" aria-atomic="true">Choose an example, then preview a reminder.
+
+No task will be created or stored.</pre>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!--=============== SOURCE ===============-->
+      <section class="source-section section-shell" id="github" aria-labelledby="source-title">
+        <div class="source-card" data-reveal>
+          <div>
+            <p class="eyebrow">// Source</p>
+            <h2 id="source-title">Made for the desktop.<br>Open to inspection.</h2>
+            <p>The project is written in Python with PyQt5, and stores tasks in SQLite. Explore the source, run it locally, or adapt the idea for your own workflow.</p>
+          </div>
+          <a class="button button-primary" href="https://github.com/VallChagas/projeto-postit.git" target="_blank" rel="noopener noreferrer">View on GitHub <span aria-hidden="true">↗</span></a>
+        </div>
+      </section>
+    </main>
+
+    <!--=============== FOOTER ===============-->
+    <footer class="site-footer section-shell">
+      <a class="brand footer-brand" href="#overview" aria-label="Persona home">
+        <span class="brand-mark" aria-hidden="true"><span></span></span>
+        <span>Persona</span>
+      </a>
+      <p class="footer-credit">A small desktop companion, made with care.</p>
+      <p class="footer-meta">PYTHON · PYQT5 · SQLITE</p>
+    </footer>
+  </body>
+</html>
