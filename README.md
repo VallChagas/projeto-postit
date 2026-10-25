@@ -6,6 +6,8 @@ Persona is an offline desktop companion for everyday tasks. A pixel-art characte
 
 This repository also contains a responsive, static portfolio website that introduces the project. Its browser demo is illustrative only; it does not connect to the desktop application or create tasks.
 
+>**Live**: https://vallchagas.github.io/projeto-postit/
+
 ## Features
 
 - Autonomous idle, walking, sitting, emote, and fall animations.
